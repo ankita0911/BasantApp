@@ -1,0 +1,6 @@
+framework module Pods_Basant_RadioTests {
+  umbrella header "Pods-Basant RadioTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,6 @@
+framework module Pods_Basant_Radio_Basant_RadioUITests {
+  umbrella header "Pods-Basant Radio-Basant RadioUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}

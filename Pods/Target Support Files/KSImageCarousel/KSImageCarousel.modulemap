@@ -1,0 +1,6 @@
+framework module KSImageCarousel {
+  umbrella header "KSImageCarousel-umbrella.h"
+
+  export *
+  module * { export * }
+}
