@@ -33,7 +33,7 @@
                                     <constraint firstAttribute="height" constant="84" id="aGa-x6-jct"/>
                                 </constraints>
                             </view>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.40000000000000002" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_screen" translatesAutoresizingMaskIntoConstraints="NO" id="gcy-jf-QEs">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_screen" translatesAutoresizingMaskIntoConstraints="NO" id="gcy-jf-QEs">
                                 <rect key="frame" x="0.0" y="84" width="414" height="812"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Basant Radio" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gue-ki-X8j">
@@ -102,11 +102,11 @@
                                     <constraint firstAttribute="width" constant="60" id="rcA-6q-29H"/>
                                 </constraints>
                             </imageView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LrP-zS-Jzh" customClass="KSICImageView" customModule="KSImageCarousel">
-                                <rect key="frame" x="0.0" y="496" width="414" height="300"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LrP-zS-Jzh" customClass="FSPagerView" customModule="FSPagerView">
+                                <rect key="frame" x="0.0" y="520" width="414" height="276"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="300" id="0j0-BO-3cz"/>
+                                    <constraint firstAttribute="width" secondItem="LrP-zS-Jzh" secondAttribute="height" multiplier="3:2" id="rfL-L6-zCN"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isInfinite" value="YES"/>
@@ -115,6 +115,9 @@
                                         <integer key="value" value="0"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isScrollEnabled" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="automaticSlidingInterval">
+                                        <real key="value" value="3"/>
+                                    </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
@@ -125,13 +128,13 @@
                             <constraint firstItem="d42-vz-hnD" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="9Jc-dk-JC4"/>
                             <constraint firstItem="5YI-6p-VnG" firstAttribute="centerY" secondItem="d42-vz-hnD" secondAttribute="centerY" id="9ta-VU-Kgk"/>
                             <constraint firstItem="dbP-1q-OaA" firstAttribute="top" secondItem="d42-vz-hnD" secondAttribute="bottom" constant="50" id="D3a-se-hcR"/>
-                            <constraint firstItem="LrP-zS-Jzh" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="FYu-9E-4s6"/>
+                            <constraint firstItem="LrP-zS-Jzh" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailing" id="FYu-9E-4s6"/>
                             <constraint firstItem="dqY-rN-bQU" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="FZR-Lx-RdA"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="gcy-jf-QEs" secondAttribute="trailing" id="QRQ-AG-tEv"/>
                             <constraint firstItem="gcy-jf-QEs" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="SD3-cR-7Qw"/>
                             <constraint firstItem="gue-ki-X8j" firstAttribute="leading" secondItem="dbP-1q-OaA" secondAttribute="trailing" constant="30" id="UFA-u0-t6L"/>
                             <constraint firstItem="dbP-1q-OaA" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="W5l-5L-R4x"/>
-                            <constraint firstItem="LrP-zS-Jzh" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="W6e-pm-eZF"/>
+                            <constraint firstItem="LrP-zS-Jzh" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="W6e-pm-eZF"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="gue-ki-X8j" secondAttribute="trailing" symbolic="YES" id="Zkn-jW-oFm"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="fnD-22-1gl" secondAttribute="trailing" id="ZzG-NA-5aF"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="dqY-rN-bQU" secondAttribute="trailing" id="aKd-Es-nIo"/>
@@ -148,7 +151,8 @@
                     </view>
                     <connections>
                         <outlet property="animatedAudio" destination="5YI-6p-VnG" id="1zd-v8-GaH"/>
-                        <outlet property="carouselContainer" destination="LrP-zS-Jzh" id="bkM-MX-g9d"/>
+                        <outlet property="bgImg" destination="gcy-jf-QEs" id="9Cb-fr-F5K"/>
+                        <outlet property="pagerView" destination="LrP-zS-Jzh" id="6rz-sf-LhY"/>
                         <outlet property="playPauseButton" destination="SEf-qO-Fuj" id="LPa-bk-aCX"/>
                     </connections>
                 </viewController>

@@ -33,6 +33,7 @@ PODS:
   - FirebaseStorage (7.3.0):
     - FirebaseCore (~> 7.0)
     - GTMSessionFetcher/Core (~> 1.4)
+  - FSPagerView (0.8.3)
   - GoogleAppMeasurement (7.3.0):
     - GoogleUtilities/AppDelegateSwizzler (~> 7.0)
     - GoogleUtilities/MethodSwizzler (~> 7.0)
@@ -61,7 +62,7 @@ PODS:
   - GoogleUtilities/UserDefaults (7.1.1):
     - GoogleUtilities/Logger
   - GTMSessionFetcher/Core (1.7.2)
-  - KSImageCarousel (1.0.5)
+  - Kingfisher (7.6.2)
   - nanopb (2.30906.0):
     - nanopb/decode (= 2.30906.0)
     - nanopb/encode (= 2.30906.0)
@@ -72,7 +73,8 @@ PODS:
 DEPENDENCIES:
   - Firebase/Core
   - Firebase/Storage
-  - KSImageCarousel
+  - FSPagerView
+  - Kingfisher (~> 7.0)
 
 SPEC REPOS:
   trunk:
@@ -82,11 +84,12 @@ SPEC REPOS:
     - FirebaseCoreDiagnostics
     - FirebaseInstallations
     - FirebaseStorage
+    - FSPagerView
     - GoogleAppMeasurement
     - GoogleDataTransport
     - GoogleUtilities
     - GTMSessionFetcher
-    - KSImageCarousel
+    - Kingfisher
     - nanopb
     - PromisesObjC
 
@@ -97,14 +100,15 @@ SPEC CHECKSUMS:
   FirebaseCoreDiagnostics: d50e11039e5984d92c8a512be2395f13df747350
   FirebaseInstallations: 971df89b48ae5ee4cc2bf6935f3857a525d28550
   FirebaseStorage: 5002b1895bfe74a5ce92ad54f966e6162d0da2e5
+  FSPagerView: 670405b2f18e2a87fa37f20b00de783e562c25a8
   GoogleAppMeasurement: 8d3c0aeede16ab7764144b5a4ca8e1d4323841b7
   GoogleDataTransport: 116c84c4bdeb76be2a7a46de51244368f9794eab
   GoogleUtilities: 3dc4ff0d5e4840e2fa8eef0889620e8c33d4218c
   GTMSessionFetcher: 5595ec75acf5be50814f81e9189490412bad82ba
-  KSImageCarousel: 469bc6d9dc594eed681ee8566199378f8a564fd4
+  Kingfisher: 6c5449c6450c5239166510ba04afe374a98afc4f
   nanopb: 1bf24dd71191072e120b83dd02d08f3da0d65e53
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
 
-PODFILE CHECKSUM: 0b441dbf3eb89ac7915c125603f2697807be75ec
+PODFILE CHECKSUM: 5b52508e8e9ac8b34326e56157bd4c709b0188cf
 
 COCOAPODS: 1.10.0

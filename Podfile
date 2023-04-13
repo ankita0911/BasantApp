@@ -6,7 +6,8 @@ target 'Basant Radio' do
   use_frameworks!
   pod 'Firebase/Core'
   pod 'Firebase/Storage' 
-  pod 'KSImageCarousel'
+  pod 'FSPagerView'
+  pod 'Kingfisher', '~> 7.0'
 
 # Pods for Basant Radio
 

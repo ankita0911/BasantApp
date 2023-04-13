@@ -8,21 +8,31 @@
 import UIKit
 import AVFoundation
 import FirebaseStorage
-import KSImageCarousel
+import FSPagerView
+import Kingfisher
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, FSPagerViewDelegate, FSPagerViewDataSource {
 
-    @IBOutlet weak var carouselContainer: UIView!
+    @IBOutlet weak var bgImg: UIImageView!
     @IBOutlet weak var animatedAudio: UIImageView!
     @IBOutlet weak var playPauseButton: UIButton!
     var player:AVPlayer?
     var playerLayer:AVPlayerLayer?
-    var urlData = [URL]()
+    var urlData = [String]()
+    
+    @IBOutlet weak var pagerView: FSPagerView!{
+        didSet {
+            self.pagerView.register(FSPagerViewCell.self, forCellWithReuseIdentifier: "cell")
+            self.pagerView.isInfinite = true
+            }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         //playPauseButton.setImage(UIImage(named: "play"), for: .normal)
+        self.bgImg.image = UIImage(named: "bg_screen")?.alpha(0.5)
+        
         NotificationCenter.default.addObserver(self,
                                                    selector: #selector(appDidEnterBackground),
                                                    name: UIApplication.didEnterBackgroundNotification, object: nil)
@@ -30,11 +40,12 @@ class ViewController: UIViewController {
         NotificationCenter.default.addObserver(self,
                                                    selector: #selector(appWillEnterForeground),
                                                    name: UIApplication.willEnterForegroundNotification, object: nil)
+        pagerView.delegate = self
+        pagerView.dataSource = self
     }
 
     override func viewWillAppear(_ animated: Bool) {
         listAllFiles()
-        
         let url = URL(string: "http://35.183.18.126/hls/basant1.m3u8")
         let playerItem:AVPlayerItem = AVPlayerItem(url: url!)
         player = AVPlayer(playerItem: playerItem)
@@ -78,41 +89,60 @@ class ViewController: UIViewController {
     }
     
     
+    public func numberOfItems(in pagerView: FSPagerView) -> Int {
+        return urlData.count
+    }
+        
+    public func pagerView(_ pagerView: FSPagerView, cellForItemAt index: Int) -> FSPagerViewCell {
+        let cell = pagerView.dequeueReusableCell(withReuseIdentifier: "cell", at: index)
+        let imageURL = urlData[index]
+        let resource = ImageResource(downloadURL: URL(string: imageURL)!)
+        cell.imageView?.kf.setImage(with: resource)
+        cell.imageView?.contentMode = .scaleToFill
+        cell.imageView?.clipsToBounds = true
+        return cell
+    }
+    
     func listAllFiles() {
         
-       let storage = Storage.storage()
-       // [START storage_list_all]
-        let storageReference = storage.reference()
-        
-       storageReference.listAll { (result, error) in
-         if let error = error {
-           // ...
-            print("error \(error)")
-         }
-         for item in result.items {
-           // The items under storageReference.
-            item.downloadURL { url, error in
-                  if let error = error {
-                    // Handle any errors
-                    print("error \(error)")
-                  } else {
-                    // Get the download URL for 'images'
-                    self.urlData.append(url!)
-                    
-                  }
-                if result.items.count == self.urlData.count{
-                    // Use coordinator to show the carousel
-                    if let coordinator = try? KSICInfiniteCoordinator(with: self.urlData, placeholderImage: nil, initialPage: 0) {
-                        coordinator.startAutoScroll(withDirection: .left, interval: 2)
-                        coordinator.shouldShowActivityIndicator = false
-                        coordinator.showCarousel(inside: self.carouselContainer, of: self)
-                    }
-                }
-            }
-         }
-       }
-     }
-    
-}
+        let storage = Storage.storage()
+        // [START storage_list_all]
+         let storageReference = storage.reference()
+         
+        storageReference.listAll { (result, error) in
+          if let error = error {
+            // ...
+             print("error \(error)")
+          }
+          for item in result.items {
+            // The items under storageReference.
+             item.downloadURL { url, error in
+                   if let error = error {
+                     // Handle any errors
+                     print("error \(error)")
+                   } else {
+                     // Get the download URL for 'images/stars.jpg'
+                     let urlPath: String = (url?.absoluteString)!
+                     self.urlData.append(urlPath)
+                   }
+                 if result.items.count == self.urlData.count{
+                     self.pagerView.reloadData()
+                 }
+             }
+          }
+        }
+      }
+     
+ }
 
+extension UIImage {
+
+    func alpha(_ value:CGFloat) -> UIImage {
+        UIGraphicsBeginImageContextWithOptions(size, false, scale)
+        draw(at: CGPoint.zero, blendMode: .normal, alpha: value)
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return newImage!
+    }
+}
 
